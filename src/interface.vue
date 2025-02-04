@@ -20,7 +20,14 @@
 
   const emit = defineEmits(['input']);
   const api = useApi();
-  const items = ref([]);
+  // Add an interface for the item structure
+  interface SelectItem {
+    text: string;
+    value: string;
+  }
+
+  // Update the ref declaration with the type
+  const items = ref<SelectItem[]>([]);
   const selectedItem = ref(props.value);
 
   watch(() => props.value, async (newValue) => {
