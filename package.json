@@ -1,5 +1,9 @@
 {
   "name": "directus-extension-reference-selector",
+  "author": {
+    "name": "Marko Siilak",
+    "email": "marko@siilak.com"
+  },
   "version": "1.0.0",
   "type": "module",
   "directus:extension": {
