@@ -1,0 +1,16 @@
+{
+  "name": "directus-extension-reference-selector",
+  "version": "1.0.0",
+  "type": "module",
+  "directus:extension": {
+    "type": "interface",
+    "path": "dist/index.cjs",
+    "source": "src/index.ts",
+    "host": "^10.1.0"
+  },
+  "scripts": {
+    "build": "directus-extension build",
+    "dev": "directus-extension build -w --no-minify",
+    "link": "directus-extension link"
+  }
+}
