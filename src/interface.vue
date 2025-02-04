@@ -23,10 +23,40 @@
   const items = ref([]);
   const selectedItem = ref(props.value);
 
-  // Add this watch to keep selectedItem in sync with external value changes
-  watch(() => props.value, (newValue) => {
+  watch(() => props.value, async (newValue) => {
     selectedItem.value = newValue;
+    if (newValue) {
+      await fetchCurrentItem(newValue);
+    }
   });
+
+  const fetchCurrentItem = async (id: string) => {
+    try {
+      const response = await api.get(`/items/${props.targetCollection}/${id}`, {
+        params: {
+          fields: ['id', 'translations.*'],
+          deep: {
+            translations: {
+              _sort: ['languages_code']
+            }
+          }
+        }
+      });
+
+      const currentItem = response.data.data;
+      const displayText = currentItem.translations[0]?.name || currentItem.translations[0]?.title || 'Missing name or title';
+
+      // Add current item to items list if not already present
+      if (!items.value.some(item => item.value === id)) {
+        items.value.push({
+          text: displayText,
+          value: id,
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching current item:', error);
+    }
+  };
 
   const fetchItems = async () => {
     try {
@@ -52,7 +82,10 @@
     }
   };
 
-  onMounted(() => {
-    fetchItems();
+  onMounted(async () => {
+    await fetchItems();
+    if (props.value) {
+      await fetchCurrentItem(props.value);
+    }
   });
 </script>
