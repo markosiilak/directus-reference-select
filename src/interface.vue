@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
   import { useApi } from '@directus/extensions-sdk';
-  import { computed, onMounted, ref, watch } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
 
   const props = defineProps<{
     targetCollection: string;
