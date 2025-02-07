@@ -15,37 +15,9 @@ var _sfc_main = /* @__PURE__ */ defineComponent({
     const api = useApi();
     const items = ref([]);
     const selectedItem = ref(props.value);
-    watch(() => props.value, async (newValue) => {
+    watch(() => props.value, (newValue) => {
       selectedItem.value = newValue;
-      if (newValue) {
-        await fetchCurrentItem(newValue);
-      }
     });
-    const fetchCurrentItem = async (id) => {
-      var _a, _b;
-      try {
-        const response = await api.get(`/items/${props.targetCollection}/${id}`, {
-          params: {
-            fields: ["id", "translations.*"],
-            deep: {
-              translations: {
-                _sort: ["languages_code"]
-              }
-            }
-          }
-        });
-        const currentItem = response.data.data;
-        const displayText = ((_a = currentItem.translations[0]) == null ? void 0 : _a.name) || ((_b = currentItem.translations[0]) == null ? void 0 : _b.title) || "Missing name or title";
-        if (!items.value.some((item) => item.value === id)) {
-          items.value.push({
-            text: displayText,
-            value: id
-          });
-        }
-      } catch (error) {
-        console.error("Error fetching current item:", error);
-      }
-    };
     const fetchItems = async () => {
       try {
         const response = await api.get(`/items/${props.targetCollection}?fields=translations.*,id`, {
@@ -70,11 +42,8 @@ var _sfc_main = /* @__PURE__ */ defineComponent({
         console.error("Error fetching items:", error);
       }
     };
-    onMounted(async () => {
-      await fetchItems();
-      if (props.value) {
-        await fetchCurrentItem(props.value);
-      }
+    onMounted(() => {
+      fetchItems();
     });
     return (_ctx, _cache) => {
       const _component_v_select = resolveComponent("v-select");
@@ -123,14 +92,11 @@ var index = defineInterface({
     },
     {
       field: "value",
-      name: "Display Field",
+      name: "Value",
       type: "string",
       meta: {
         width: "half",
-        interface: "system-field",
-        options: {
-          collectionField: "targetCollection"
-        }
+        interface: "input"
       }
     },
     {

@@ -21,14 +21,11 @@ export default defineInterface({
     },
     {
       field: "value",
-      name: "Display Field",
+      name: "Value",
       type: "string",
       meta: {
         width: "half",
-        interface: "system-field",
-        options: {
-          collectionField: "targetCollection",
-        },
+        interface: "input",
       },
     },
     {

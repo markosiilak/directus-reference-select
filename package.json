@@ -1,9 +1,5 @@
 {
   "name": "directus-extension-reference-selector",
-  "author": {
-    "name": "Marko Siilak",
-    "email": "marko@siilak.com"
-  },
   "version": "1.0.0",
   "type": "module",
   "directus:extension": {
@@ -16,8 +12,5 @@
     "build": "directus-extension build",
     "dev": "directus-extension build -w --no-minify",
     "link": "directus-extension link"
-  },
-  "dependencies": {
-    "@directus/extensions-sdk" : "^10.3.4"
   }
 }
