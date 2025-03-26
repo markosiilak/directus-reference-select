@@ -1,6 +1,6 @@
-import { defineInterface } from '@directus/extensions-sdk';
+import { defineInterface } from "@directus/extensions-sdk"
 
-import InterfaceComponent from "./interface.vue";
+import InterfaceComponent from "./interface.vue"
 export default defineInterface({
   id: "reference-selector",
   name: "Reference Selector",
@@ -16,8 +16,8 @@ export default defineInterface({
       type: "string",
       meta: {
         width: "half",
-        interface: "system-collection",
-      },
+        interface: "system-collection"
+      }
     },
     {
       field: "value",
@@ -25,8 +25,8 @@ export default defineInterface({
       type: "string",
       meta: {
         width: "half",
-        interface: "input",
-      },
+        interface: "input"
+      }
     },
     {
       field: "placeholder",
@@ -34,8 +34,8 @@ export default defineInterface({
       type: "string",
       meta: {
         width: "full",
-        interface: "input",
-      },
+        interface: "input"
+      }
     }
-  ],
-});
+  ]
+})
